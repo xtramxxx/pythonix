@@ -1,0 +1,108 @@
+{% extends 'app_admin/base.html' %}
+{% load staticfiles %}
+{% block css_block %}
+    <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css" %}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{% static "plugins/datatables/dataTables.bootstrap.css" %}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static "dist/css/AdminLTE.min.css" %}">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="{% static "dist/css/skins/_all-skins.min.css" %}">
+{% endblock %}
+
+{% block Content %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Список клиентов
+          </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="row">
+            <div class="col-xs-12">
+
+
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">{{ clients_group }} {{ clients_list.count }}</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Адрес</th>
+                        <th>Баланс</th>
+                        <th>Дата отключения</th>
+                        <th>Тариф</th>
+                        <th>Действия</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+
+                      {% for client in clients_list %}
+                      <tr>
+                        <th>{{ client.select_street.title }} {{ client.home_address }}</th>
+                        <th>{{ client.balance }}</th>
+                        <th>{{ client.end_used_date }}</th>
+                        <th>{{ client.select_tarif.title }}</th>
+                        <th><a href="{% url 'pythonix_admin:client_info' client.id %}"><button class="btn btn-block btn-default">Инфо</button></a></th>
+                      </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+
+                    </tfoot>
+                  </table>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </section><!-- /.content -->
+      </div>
+
+{% endblock %}
+
+
+{% block js_block %}
+     <!-- jQuery 2.1.4 -->
+    <script src="{% static "plugins/jQuery/jQuery-2.1.4.min.js" %}"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+    <!-- DataTables -->
+    <script src="{% static "plugins/datatables/jquery.dataTables.min.js" %}"></script>
+    <script src="{% static "plugins/datatables/dataTables.bootstrap.min.js" %}"></script>
+    <!-- SlimScroll -->
+    <script src="{% static "plugins/slimScroll/jquery.slimscroll.min.js" %}"></script>
+    <!-- FastClick -->
+    <script src="{% static "plugins/fastclick/fastclick.min.js" %}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static "dist/js/app.min.js" %}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="{% static "dist/js/demo.js" %}"></script>
+    <!-- page script -->
+    <script>
+      $(function () {
+        $("#example1").DataTable();
+        $('#example2').DataTable({
+          "paging": true,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false
+        });
+      });
+    </script>
+{% endblock %}
+
+
+

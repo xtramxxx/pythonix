@@ -1,0 +1,10 @@
+{% load widget_tweaks %}
+<div class="form-group">
+    <label class="b-label">{{ field.label }}</label>
+    {% if field.errors %}
+        {{ field|add_class:"form-control error_border" }}
+        {{ field.errors }}
+    {% else %}
+        {{ field|add_class:"form-control" }}
+    {% endif %}
+</div>

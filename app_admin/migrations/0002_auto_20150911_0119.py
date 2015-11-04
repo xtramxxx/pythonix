@@ -1,0 +1,179 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+import datetime
+import django.contrib.auth.models
+from django.conf import settings
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('auth', '0006_require_contenttypes_0002'),
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('app_admin', '0001_initial'),
+    ]
+
+    operations = [
+        migrations.CreateModel(
+            name='Clients',
+            fields=[
+                ('user_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
+                ('ip_address', models.GenericIPAddressField(verbose_name=b'IP \xd0\xb0\xd0\xb4\xd1\x80\xd0\xb5\xd1\x81 \xd0\xba\xd0\xbb\xd0\xb8\xd0\xb5\xd0\xbd\xd0\xb0')),
+                ('ipv6_address', models.GenericIPAddressField(default=b'2001:0db8:11a3:09d7:1f34:8a2e:07a0:765d', verbose_name=b'IPv6 \xd0\xb0\xd0\xb4\xd1\x80\xd0\xb5\xd1\x81 \xd0\xba\xd0\xbb\xd0\xb8\xd0\xb5\xd0\xbd\xd0\xb0')),
+                ('send_sms', models.BooleanField(default=False, verbose_name=b'\xd0\x96\xd0\xb5\xd0\xbb\xd0\xb0\xd0\xbd\xd0\xb8\xd0\xb5 \xd0\xbf\xd0\xbe\xd0\xbb\xd1\x83\xd1\x87\xd0\xb0\xd1\x82\xd1\x8c \xd1\x81\xd0\xbc\xd1\x81')),
+                ('create_date', models.DateField(auto_now_add=True, verbose_name=b'\xd0\x94\xd0\xb0\xd1\x82\xd0\xb0 \xd0\xbf\xd0\xbe\xd0\xb4\xd0\xba\xd0\xbb\xd1\x8e\xd1\x87\xd0\xb5\xd0\xbd\xd0\xb8\xd1\x8f')),
+                ('end_used_date', models.DateField(default=datetime.datetime(2015, 9, 18, 1, 19, 26, 387000), verbose_name=b'\xd0\x94\xd0\xb0\xd1\x82\xd0\xb0 \xd0\xbe\xd0\xba\xd0\xbe\xd0\xbd\xd1\x87\xd1\x8f\xd0\xbd\xd0\xb8\xd1\x8f \xd1\x83\xd1\x81\xd0\xbb\xd1\x83\xd0\xb3\xd0\xb8')),
+                ('mobile_phone', models.CharField(max_length=50, null=True, verbose_name=b'\xd0\x9c\xd0\xbe\xd0\xb1\xd0\xb8\xd0\xbb\xd1\x8c\xd0\xbd\xd1\x8b\xd0\xb9 \xd1\x82\xd0\xb5\xd0\xbb\xd0\xb5\xd1\x84\xd0\xbe\xd0\xbd', blank=True)),
+                ('home_address', models.CharField(max_length=50, null=True, verbose_name=b'\xd0\x94\xd0\xbe\xd0\xbc\xd0\xb0\xd1\x88\xd0\xbd\xd0\xb8\xd0\xb9 \xd0\xb0\xd0\xb4\xd1\x80\xd0\xb5\xd1\x81', blank=True)),
+                ('network_traffic_per_day', models.IntegerField(default=0, null=True, verbose_name=b'\xd0\xa1\xd0\xb5\xd1\x82\xd0\xb5\xd0\xb2\xd0\xbe\xd0\xb9 \xd1\x82\xd1\x80\xd0\xb0\xd1\x84\xd0\xb8\xd0\xba \xd0\xb7\xd0\xb0 \xd0\xb4\xd0\xb5\xd0\xbd\xd1\x8c')),
+                ('network_traffic_for_the_month', models.IntegerField(default=0, null=True, verbose_name=b'\xd0\xa1\xd0\xb5\xd1\x82\xd0\xb5\xd0\xb2\xd0\xbe\xd0\xb9 \xd1\x82\xd1\x80\xd0\xb0\xd1\x84\xd0\xb8\xd0\xba \xd0\xb7\xd0\xb0 \xd0\xbc\xd0\xb5\xd1\x81\xd1\x8f\xd1\x86')),
+                ('balance', models.IntegerField(default=0, verbose_name=b'\xd0\x91\xd0\xb0\xd0\xbb\xd0\xb0\xd0\xbd\xd1\x81')),
+                ('internet_status', models.BooleanField(default=1, verbose_name=b'\xd0\xa1\xd1\x82\xd0\xb0\xd1\x82\xd1\x83\xd1\x81 \xd0\xba\xd0\xbb\xd0\xb8\xd0\xb5\xd0\xbd\xd1\x82\xd0\xb0, \xd0\xb4\xd0\xbe\xd1\x81\xd1\x82\xd1\x83\xd0\xbf \xd1\x80\xd0\xb0\xd0\xb7\xd1\x80\xd0\xb5\xd1\x88\xd0\xb5\xd0\xbd/\xd0\xb7\xd0\xb0\xd0\xbf\xd1\x80\xd0\xb5\xd1\x89\xd0\xb5\xd0\xbd')),
+                ('error_card', models.IntegerField(default=0, null=True, verbose_name=b'\xd0\x9e\xd1\x88\xd0\xb8\xd0\xb1\xd0\xba\xd0\xb8 \xd0\xbf\xd0\xbe\xd0\xbf\xd0\xbe\xd0\xbb\xd0\xbd\xd0\xb5\xd0\xbd\xd0\xb8\xd1\x8f \xd0\xba\xd0\xb0\xd1\x80\xd1\x82\xd0\xbe\xd1\x87\xd0\xba\xd0\xbe\xd0\xb9')),
+                ('deleted_user', models.BooleanField(default=False, verbose_name=b'\xd0\xa1\xd1\x82\xd0\xb0\xd1\x82\xd1\x83\xd1\x81 \xd1\x83\xd0\xb4\xd0\xb0\xd0\xbb\xd0\xb5\xd0\xbd\xd0\xb8\xd1\x8f \xd0\xbf\xd0\xbe\xd0\xbb\xd1\x8c\xd0\xb7\xd0\xbe\xd0\xb2\xd0\xb0\xd1\x82\xd0\xb5\xd0\xbb\xd1\x8f')),
+            ],
+            options={
+                'db_table': 'clients',
+                'verbose_name': '\u041a\u043b\u0438\u0435\u043d\u0442',
+                'verbose_name_plural': '\u041a\u043b\u0438\u0435\u043d\u0442\u044b',
+            },
+            bases=('auth.user',),
+            managers=[
+                (b'objects', django.contrib.auth.models.UserManager()),
+            ],
+        ),
+        migrations.CreateModel(
+            name='ClientsGroups',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=50, verbose_name=b'\xd0\x9d\xd0\xb0\xd0\xb7\xd0\xb2\xd0\xb0\xd0\xbd\xd0\xb8\xd0\xb5 \xd0\xb3\xd1\x80\xd1\x83\xd0\xbf\xd0\xbf\xd1\x8b')),
+            ],
+            options={
+                'db_table': 'clients_groups',
+                'verbose_name': '\u0413\u0440\u0443\u043f\u043f\u0430 \u043a\u043b\u0438\u0435\u043d\u0442\u043e\u0432',
+                'verbose_name_plural': '\u0413\u0440\u0443\u043f\u043f\u044b \u043a\u043b\u0438\u0435\u043d\u0442\u043e\u0432',
+            },
+        ),
+        migrations.CreateModel(
+            name='IPV4Networks',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('ipv4networks', models.GenericIPAddressField(verbose_name=b'IP \xd0\x9f\xd0\xbe\xd0\xb4\xd1\x81\xd0\xb5\xd1\x82\xd0\xb8')),
+                ('CIDR', models.IntegerField(default=24, choices=[(1, b'1'), (2, b'2'), (3, b'3'), (4, b'4'), (5, b'5'), (6, b'6'), (7, b'7'), (8, b'8'), (9, b'9'), (10, b'10'), (11, b'11'), (12, b'12'), (13, b'13'), (14, b'14'), (15, b'15'), (16, b'16'), (17, b'17'), (18, b'18'), (19, b'19'), (20, b'20'), (21, b'21'), (22, b'22'), (23, b'23'), (24, b'24'), (25, b'25'), (26, b'26'), (27, b'27'), (28, b'28'), (29, b'29'), (30, b'30'), (31, b'31'), (32, b'32')])),
+            ],
+            options={
+                'db_table': 'ip_v4_networks',
+                'verbose_name': '\u041f\u043e\u0434\u0441\u0435\u0442\u044c IPv4',
+                'verbose_name_plural': '\u0421\u043f\u0438\u0441\u043e\u043a \u043f\u043e\u0434\u0441\u0435\u0442\u0435\u0439 IPv4',
+            },
+        ),
+        migrations.CreateModel(
+            name='PhysicalNetwork',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=150, verbose_name=b'\xd0\x9d\xd0\xb0\xd0\xb7\xd0\xb2\xd0\xb0\xd0\xbd\xd0\xb8\xd0\xb5 \xd1\x84\xd0\xb8\xd0\xb7\xd0\xb8\xd1\x87\xd0\xb5\xd1\x81\xd0\xba\xd0\xbe\xd0\xb9 \xd1\x81\xd0\xb5\xd1\x82\xd0\xb8')),
+                ('abbreviation', models.CharField(max_length=150, verbose_name=b'\xd0\x90\xd0\xb1\xd0\xb1\xd1\x80\xd0\xb5\xd0\xb2\xd0\xb8\xd0\xb0\xd1\x82\xd1\x83\xd1\x80\xd0\xb0 \xd1\x84\xd0\xb8\xd0\xb7\xd0\xb8\xd1\x87\xd0\xb5\xd1\x81\xd0\xba\xd0\xbe\xd0\xb9 \xd1\x81\xd0\xb5\xd1\x82\xd0\xb8')),
+                ('channel_width', models.IntegerField(verbose_name=b'\xd0\xa8\xd0\xb8\xd1\x80\xd0\xb8\xd0\xbd\xd0\xb0 \xd0\xba\xd0\xb0\xd0\xbd\xd0\xb0\xd0\xbb\xd0\xb0', blank=True)),
+                ('select_admin', models.ManyToManyField(to=settings.AUTH_USER_MODEL, verbose_name=b'\xd0\x92\xd1\x8b\xd0\xb1\xd0\xbe\xd1\x80 \xd0\xb0\xd0\xb4\xd0\xbc\xd0\xb8\xd0\xbd\xd0\xb8\xd1\x81\xd1\x82\xd1\x80\xd0\xb0\xd1\x82\xd0\xbe\xd1\x80\xd0\xb0')),
+            ],
+            options={
+                'db_table': 'physical_network',
+                'verbose_name': '\u0424\u0438\u0437\u0438\u0447\u0435\u0441\u043a\u0430\u044f \u0441\u0435\u0442\u044c',
+                'verbose_name_plural': '\u0424\u0438\u0437\u0438\u0447\u0435\u0441\u043a\u0438\u0435 \u0441\u0435\u0442\u0438',
+            },
+        ),
+        migrations.CreateModel(
+            name='Servers',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=150, verbose_name=b'\xd0\x9d\xd0\xb0\xd0\xb7\xd0\xb2\xd0\xb0\xd0\xbd\xd0\xb8\xd0\xb5 \xd0\xa1\xd0\xb5\xd1\x80\xd0\xb2\xd0\xb5\xd1\x80\xd0\xb0')),
+                ('device_type', models.IntegerField(default=1, verbose_name=b'\xd0\x92\xd1\x8b\xd0\xb1\xd0\xbe\xd1\x80 \xd0\xbe\xd0\xbf\xd0\xb5\xd1\x80\xd0\xb0\xd1\x86\xd0\xb8\xd0\xbe\xd0\xbd\xd0\xbd\xd0\xbe\xd0\xb9 \xd1\x81\xd0\xb8\xd1\x81\xd1\x82\xd0\xb5\xd0\xbc\xd1\x8b', choices=[(1, b'MikroTik RouterOS')])),
+                ('network_address', models.GenericIPAddressField(verbose_name=b'\xd0\xa1\xd0\xb5\xd1\x82\xd0\xb5\xd0\xb2\xd0\xbe\xd0\xb9 \xd0\xb0\xd0\xb4\xd1\x80\xd0\xb5\xd1\x81 \xd1\x83\xd1\x81\xd1\x82\xd1\x80\xd0\xbe\xd0\xb9\xd1\x81\xd1\x82\xd0\xb2\xd0\xb0')),
+                ('login', models.CharField(max_length=50, verbose_name=b'\xd0\x9b\xd0\xbe\xd0\xb3\xd0\xb8\xd0\xbd \xd0\xb4\xd0\xbb\xd1\x8f \xd0\xb4\xd0\xbe\xd1\x81\xd1\x82\xd1\x83\xd0\xbf\xd0\xb0 \xd0\xba \xd1\x83\xd1\x81\xd1\x82\xd1\x80\xd0\xbe\xd0\xb9\xd1\x81\xd1\x82\xd0\xb2\xd1\x83')),
+                ('password', models.CharField(max_length=50, verbose_name=b'\xd0\x9f\xd0\xb0\xd1\x80\xd0\xbe\xd0\xbb\xd1\x8c \xd0\xb4\xd0\xbb\xd1\x8f \xd0\xb4\xd0\xbe\xd1\x81\xd1\x82\xd1\x83\xd0\xbf\xd0\xb0 \xd0\xba \xd1\x83\xd1\x81\xd1\x82\xd1\x80\xd0\xbe\xd0\xb9\xd1\x81\xd1\x82\xd0\xb2\xd1\x83')),
+                ('api_port', models.IntegerField(default=8728, verbose_name=b'API \xd0\xbf\xd0\xbe\xd1\x80\xd1\x82')),
+                ('status_on_off', models.BooleanField(default=True, verbose_name=b'\xd0\xa1\xd0\xbe\xd1\x81\xd1\x82\xd0\xbe\xd1\x8f\xd0\xbd\xd0\xb8\xd0\xb5 \xd1\x80\xd0\xb0\xd0\xb1\xd0\xbe\xd1\x82\xd1\x8b \xd1\x81\xd0\xb5\xd1\x80\xd0\xb2\xd0\xb5\xd1\x80\xd0\xb0')),
+                ('physical_network', models.ForeignKey(verbose_name=b'\xd0\x92\xd1\x8b\xd0\xb1\xd0\xbe\xd1\x80 \xd1\x84\xd0\xb8\xd0\xb7\xd0\xb8\xd1\x87\xd0\xb5\xd1\x81\xd0\xba\xd0\xbe\xd0\xb9 \xd1\x81\xd0\xb5\xd1\x82\xd0\xb8', to='app_admin.PhysicalNetwork')),
+            ],
+            options={
+                'db_table': 'device',
+                'verbose_name': '\u0421\u0435\u0440\u0432\u0435\u0440',
+                'verbose_name_plural': '\u0421\u0435\u0440\u0432\u0435\u0440\u0430',
+            },
+        ),
+        migrations.CreateModel(
+            name='Streets',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=150, verbose_name=b'\xd0\x9d\xd0\xb0\xd0\xb7\xd0\xb2\xd0\xb0\xd0\xbd\xd0\xb8\xd0\xb5 \xd1\x83\xd0\xbb\xd0\xb8\xd1\x86\xd1\x8b')),
+                ('select_physical_network', models.ForeignKey(verbose_name=b'\xd0\x92\xd1\x8b\xd0\xb1\xd0\xbe\xd1\x80 \xd1\x84\xd0\xb8\xd0\xb7\xd0\xb8\xd1\x87\xd0\xb5\xd1\x81\xd0\xba\xd0\xbe\xd0\xb9 \xd1\x81\xd0\xb5\xd1\x82\xd0\xb8', to='app_admin.PhysicalNetwork')),
+            ],
+            options={
+                'db_table': 'streets',
+                'verbose_name': '\u0423\u043b\u0438\u0446\u0443',
+                'verbose_name_plural': '\u0423\u043b\u0438\u0446\u044b',
+            },
+        ),
+        migrations.CreateModel(
+            name='Tarifs',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=150, verbose_name=b'\xd0\x9d\xd0\xb0\xd0\xb7\xd0\xb2\xd0\xb0\xd0\xbd\xd0\xb8\xd0\xb5 \xd1\x82\xd0\xb0\xd1\x80\xd0\xb8\xd1\x84\xd0\xb0')),
+                ('speed_up', models.IntegerField(verbose_name=b'\xd0\x98\xd1\x81\xd1\x85\xd0\xbe\xd0\xb4\xd1\x8f\xd1\x89\xd0\xb0\xd1\x8f \xd1\x81\xd0\xba\xd0\xbe\xd1\x80\xd0\xbe\xd1\x81\xd1\x82\xd1\x8c, \xd0\xb7\xd0\xbd\xd0\xb0\xd1\x87\xd0\xb5\xd0\xbd\xd0\xb8\xd0\xb5')),
+                ('speed_down', models.IntegerField(verbose_name=b'\xd0\x92\xd1\x85\xd0\xbe\xd0\xb4\xd1\x8f\xd1\x89\xd0\xb0\xd1\x8f \xd1\x81\xd0\xba\xd0\xbe\xd1\x80\xd0\xbe\xd1\x81\xd1\x82\xd1\x8c, \xd0\xb7\xd0\xbd\xd0\xb0\xd1\x87\xd0\xb5\xd0\xbd\xd0\xb8\xd0\xb5')),
+                ('speed_up_unit', models.CharField(max_length=1, verbose_name=b'\xd0\x98\xd1\x81\xd1\x85\xd0\xbe\xd0\xb4\xd1\x8f\xd1\x89\xd0\xb0\xd1\x8f \xd1\x81\xd0\xba\xd0\xbe\xd1\x80\xd0\xbe\xd1\x81\xd1\x82\xd1\x8c, \xd0\xb5\xd0\xb4\xd0\xb8\xd0\xbd\xd0\xb8\xd1\x86\xd0\xb0 \xd0\xb8\xd0\xb7\xd0\xbc\xd0\xb5\xd1\x80\xd0\xb5\xd0\xbd\xd0\xb8\xd1\x8f', choices=[(b'k', b'k'), (b'M', b'M')])),
+                ('speed_down_unit', models.CharField(max_length=1, verbose_name=b'\xd0\x92\xd1\x85\xd0\xbe\xd0\xb4\xd1\x8f\xd1\x89\xd0\xb0\xd1\x8f \xd1\x81\xd0\xba\xd0\xbe\xd1\x80\xd0\xbe\xd1\x81\xd1\x82\xd1\x8c, \xd0\xb5\xd0\xb4\xd0\xb8\xd0\xbd\xd0\xb8\xd1\x86\xd0\xb0 \xd0\xb8\xd0\xb7\xd0\xbc\xd0\xb5\xd1\x80\xd0\xb5\xd0\xbd\xd0\xb8\xd1\x8f', choices=[(b'k', b'k'), (b'M', b'M')])),
+                ('price', models.IntegerField(verbose_name=b'\xd0\x90\xd0\xb1\xd0\xbe\xd0\xbd\xd0\xbf\xd0\xbb\xd0\xb0\xd1\x82\xd0\xb0')),
+                ('speed_limit', models.BooleanField(default=False, verbose_name=b'\xd0\x9b\xd0\xb8\xd0\xbc\xd0\xb8\xd1\x82\xd0\xb8\xd1\x80\xd0\xbe\xd0\xb2\xd0\xb0\xd0\xbd\xd0\xb8\xd0\xb5 \xd1\x81\xd0\xba\xd0\xbe\xd1\x80\xd0\xbe\xd1\x81\xd1\x82\xd0\xb8')),
+                ('limit_rule', models.CharField(max_length=200, null=True, verbose_name=b'\xd0\x9f\xd1\x80\xd0\xb0\xd0\xb2\xd0\xb8\xd0\xbb\xd0\xbe, \xd0\xbb\xd0\xb8\xd0\xbc\xd0\xb8\xd1\x82\xd0\xb0', blank=True)),
+                ('add_rule_in_device', models.BooleanField(default=True, verbose_name=b'\xd0\xa1\xd0\xbe\xd0\xb7\xd0\xb4\xd0\xb0\xd0\xb2\xd0\xb0\xd1\x82\xd1\x8c \xd0\xbb\xd0\xb8 \xd0\xbf\xd1\x80\xd0\xb0\xd0\xb2\xd0\xb8\xd0\xbb\xd0\xb0 \xd0\xb2 \xd1\x83\xd1\x81\xd1\x82\xd1\x80\xd0\xbe\xd0\xb9\xd1\x81\xd1\x82\xd0\xb2\xd0\xb5')),
+                ('select_physicalnetwork', models.ForeignKey(verbose_name=b'\xd0\x92\xd1\x8b\xd0\xb1\xd0\xbe\xd1\x80 \xd1\x84\xd0\xb8\xd0\xb7\xd0\xb8\xd1\x87\xd0\xb5\xd1\x81\xd0\xba\xd0\xbe\xd0\xb9 \xd1\x81\xd0\xb5\xd1\x82\xd0\xb8', to='app_admin.PhysicalNetwork')),
+            ],
+            options={
+                'db_table': 'tarifs',
+                'verbose_name': '\u0422\u0430\u0440\u0438\u0444',
+                'verbose_name_plural': '\u0422\u0430\u0440\u0438\u0444\u044b',
+            },
+        ),
+        migrations.AlterModelOptions(
+            name='adminprofile',
+            options={'verbose_name': '\u041f\u0440\u043e\u0444\u0438\u043b\u044c \u0430\u0434\u043c\u0438\u043d\u0438\u0441\u0442\u0440\u0430\u0442\u043e\u0440\u0430', 'verbose_name_plural': '\u041f\u0440\u043e\u0444\u0438\u043b\u0438 \u0430\u0434\u043c\u0438\u043d\u0438\u0441\u0442\u0440\u0430\u0442\u043e\u0440\u043e\u0432'},
+        ),
+        migrations.AlterField(
+            model_name='adminprofile',
+            name='permissions_role',
+            field=models.IntegerField(default=1, verbose_name=b'\xd0\x92\xd1\x8b\xd0\xb1\xd0\xbe\xd1\x80 \xd0\xbf\xd1\x80\xd0\xb8\xd0\xb2\xd0\xb5\xd0\xbb\xd0\xb5\xd0\xb3\xd0\xb8\xd0\xb9 \xd0\xb4\xd0\xbe\xd1\x81\xd1\x82\xd1\x83\xd0\xbf\xd0\xb0', choices=[(1, b'All action'), (2, b'See, Add, Edit, Del  Clients'), (3, b'See Report'), (4, b'Generated card'), (5, b'See client')]),
+        ),
+        migrations.AddField(
+            model_name='clientsgroups',
+            name='ipv4networks_list',
+            field=models.ManyToManyField(to='app_admin.IPV4Networks', verbose_name=b'\xd0\xa1\xd0\xbf\xd0\xb8\xd1\x81\xd0\xbe\xd0\xba \xd0\xbf\xd0\xbe\xd0\xb4\xd1\x81\xd0\xb5\xd1\x82\xd0\xb5\xd0\xb9 IPv4'),
+        ),
+        migrations.AddField(
+            model_name='clientsgroups',
+            name='select_admin',
+            field=models.ManyToManyField(to=settings.AUTH_USER_MODEL, verbose_name=b'\xd0\x92\xd1\x8b\xd0\xb1\xd0\xbe\xd1\x80 \xd0\xb0\xd0\xb4\xd0\xbc\xd0\xb8\xd0\xbd\xd0\xb8\xd1\x81\xd1\x82\xd1\x80\xd0\xb0\xd1\x82\xd0\xbe\xd1\x80\xd0\xb0'),
+        ),
+        migrations.AddField(
+            model_name='clientsgroups',
+            name='select_server',
+            field=models.ForeignKey(verbose_name=b'\xd0\x92\xd1\x8b\xd0\xb1\xd0\xbe\xd1\x80 \xd1\x81\xd0\xb5\xd1\x80\xd0\xb2\xd0\xb5\xd1\x80\xd0\xb0', to='app_admin.Servers'),
+        ),
+        migrations.AddField(
+            model_name='clients',
+            name='select_clients_group',
+            field=models.ForeignKey(verbose_name=b'\xd0\x92\xd1\x8b\xd0\xb1\xd0\xbe\xd1\x80 \xd0\xb3\xd1\x80\xd1\x83\xd0\xbf\xd0\xbf\xd1\x8b \xd0\xba\xd0\xbb\xd0\xb8\xd0\xb5\xd0\xbd\xd1\x82\xd0\xbe\xd0\xb2', to='app_admin.ClientsGroups'),
+        ),
+        migrations.AddField(
+            model_name='clients',
+            name='select_street',
+            field=models.ForeignKey(verbose_name=b'\xd0\x92\xd1\x8b\xd0\xb1\xd0\xbe\xd1\x80 \xd1\x83\xd0\xbb\xd0\xb8\xd1\x86\xd1\x8b', to='app_admin.Streets'),
+        ),
+        migrations.AddField(
+            model_name='clients',
+            name='select_tarif',
+            field=models.ForeignKey(verbose_name=b'\xd0\x92\xd1\x8b\xd0\xb1\xd0\xbe\xd1\x80 \xd1\x82\xd0\xb0\xd1\x80\xd0\xb8\xd1\x84\xd0\xb0', to='app_admin.Tarifs'),
+        ),
+    ]

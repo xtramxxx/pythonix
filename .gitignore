@@ -1,0 +1,10 @@
+*.DS_Store
+.idea/
+TODO
+*.zip
+test.html
+*.log
+test.html
+app_admin/templates/app_admin/pages
+*.pyc
+VIRT/

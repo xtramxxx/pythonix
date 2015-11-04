@@ -1,0 +1,10 @@
+{% load widget_tweaks %}
+<div class="checkbox">
+    <label>
+        {% if field.errors %}
+            {{ field|add_class:"form-control error_border" }}{{ field.label }}{{ field.errors }}
+        {% else %}
+            {{ field }} {{ field.label }}
+        {% endif %}
+    </label>
+</div>

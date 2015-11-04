@@ -1,0 +1,128 @@
+{% extends 'app_admin/base.html' %}
+{% load cms %}
+{% block Content %}
+<div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Создание клиента
+          </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-6">
+              <!-- general form elements -->
+              <div class="box box-default">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Форма создания клиента</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                 <form method="POST" class="b-form" name="add_client_form" id="resume-form" enctype="multipart/form-data" action="{% url 'pythonix_admin:create_client' %}">
+                     {% csrf_token %}
+                  <div class="box-body">
+                    <div class="form-group">
+                      <label>Выбор сети</label>
+                      <select class="form-control" id="physical_networks" name="name_physical_networks">
+                            <option value="">Выбрать сеть</option>
+                          {% for physical_network in physical_networks %}
+                            <option value="{{ physical_network.id }}">{{ physical_network.name }}</option>
+                          {% endfor %}
+                      </select>
+                    </div>
+                    {% lite_include 'app_admin/__includes/form_fields/select.html' field=form.select_clients_group %}
+
+                      <!-- Список свободных ip -->
+                    <div class="form-group">
+                      <label>Выбор свободного IP</label>
+                      <select class="form-control" id="select_ip" name="name_select_ip">
+                      </select>
+                    </div>
+                    {% lite_include 'app_admin/__includes/form_fields/input_ipv4_address.html' field=form.ip_address %}
+                    {% lite_include 'app_admin/__includes/form_fields/input_text.html' field=form.ipv6_address %}
+                    {% lite_include 'app_admin/__includes/form_fields/input_text.html' field=form.username %}
+                    {% lite_include 'app_admin/__includes/form_fields/input_text.html' field=form.first_name %}
+                    {% lite_include 'app_admin/__includes/form_fields/input_text.html' field=form.last_name %}
+                    {% lite_include 'app_admin/__includes/form_fields/input_text.html' field=form.email %}
+                    {% lite_include 'app_admin/__includes/form_fields/radio.html' field=form.send_sms %}
+                    {% lite_include 'app_admin/__includes/form_fields/select.html' field=form.select_tarif %}
+                    {% lite_include 'app_admin/__includes/form_fields/select.html' field=form.select_street %}
+                    {% lite_include 'app_admin/__includes/form_fields/input_text.html' field=form.mobile_phone %}
+                    {% lite_include 'app_admin/__includes/form_fields/input_text.html' field=form.home_address %}
+                    {% lite_include 'app_admin/__includes/form_fields/input_balance.html' field=form.balance %}
+
+
+
+                  </div><!-- /.box-body -->
+
+                  <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </form>
+              </div><!-- /.box -->
+
+
+
+            </div><!--/.col (left) -->
+
+
+          </div>   <!-- /.row -->
+        </section><!-- /.content -->
+      </div>
+{% endblock %}
+
+{% block js_block %}
+    {{ block.super }}
+    <script type="application/javascript">
+
+        // Выбор группы клиентов из списка
+        $('#id_select_clients_group').change(function() {
+            var client_group = $("select#id_select_clients_group").val();
+            var page_url = '/pythonix_admin/get_free_ipaddress/' + client_group + '/';
+            $.get(page_url, function(data) { //Выполняем запрос на получение списка свободных ip.
+
+                    var text = "<option value=''>Выберите ip адрес</option>";
+                    for (var i in data) {  //Наполняем список элементами.
+                        add_element = "<option value="+i+">"+data[i]+"</option>";
+                        text += add_element;
+
+                    }
+                    document.add_client_form.select_ip.innerHTML = text;
+                });
+        });
+
+        // Выбор свободного ip адреса
+        $('#select_ip').change(function() {
+            var free_ip = $("select#select_ip").val();
+            $('#id_ip_address').val(free_ip);
+        });
+
+        // Выбор физической сети
+        $('#physical_networks').change(function() {
+            var physical_network = $("select#physical_networks").val();
+            var page_url = '/pythonix_admin/abbreviation_physical_network/' + physical_network + '/';
+            if (physical_network != ""){
+                // Получаем абривиатуру выбранной сети
+                $.get(page_url, function(data) {
+                    $('#id_username').val(data['abbreviation']+'_');
+                });
+
+
+                // Список групп клиентов, выбранной сети
+                var page_url = '/pythonix_admin/get_client_groups/' + physical_network + '/';
+                $.get(page_url, function(data) {
+                    var text = "<option value=''>Выберите группу клиентов</option>";
+                    for (var i in data) {
+                        add_element = "<option value="+i+">"+data[i]+"</option>";
+                        text += add_element;
+
+                    }
+                    document.add_client_form.select_clients_group.innerHTML = text;
+                });
+            }
+
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% load widget_tweaks %}
+<div class="form-group">
+    <label class="b-label">{{ field.label }}</label>
+    {% if field.errors %}
+        <select class="form-control error_border" name="{{ field }}" >
+            {% for tarif in field %}
+                <option value={{ tarif }}</option>
+            {% endfor %}
+        </select>
+        {{ field.errors }}
+    {% else %}
+        <select class="form-control" name={{ field }}>
+            {% for tarif in field %}
+                <option value={{ tarif }}</option>
+            {% endfor %}
+        </select>
+    {% endif %}
+</div>

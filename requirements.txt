@@ -1,0 +1,4 @@
+django==1.8.4
+django-widget-tweaks==1.4.1
+iplib==1.1
+django-simple-captcha

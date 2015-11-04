@@ -1,0 +1,45 @@
+{% extends 'app_admin/base.html' %}
+{% load cms %}
+{% block Content %}
+<div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Удалить клиента
+          </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-6">
+              <!-- general form elements -->
+              <div class="box box-default">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Форма удаления клиента</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                 <form method="POST" class="b-form" name="add_client_form" id="resume-form" enctype="multipart/form-data" action="{% url 'pythonix_admin:del_client' client_id %}">
+                     {% csrf_token %}
+                  <div class="box-body">
+
+                    {% lite_include 'app_admin/__includes/form_fields/input_text.html' field=form.captcha %}
+
+                  </div><!-- /.box-body -->
+
+                  <div class="box-footer">
+                    <button type="submit" class="btn btn-danger">Удалить</button>
+                  </div>
+                </form>
+              </div><!-- /.box -->
+
+
+
+            </div><!--/.col (left) -->
+
+
+          </div>   <!-- /.row -->
+        </section><!-- /.content -->
+      </div>
+{% endblock %}
